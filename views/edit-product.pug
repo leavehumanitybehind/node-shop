@@ -1,0 +1,23 @@
+extends layouts/main-layout.pug
+block styles 
+    link(rel="stylesheet", href="/css/forms.css")
+block content 
+ if editing
+    form.product-form(action=`/admin/edit-product` method="POST")
+        div.form-control
+            label.title
+                input(type="text" name="title" id="title" placeholder="Title" value=`${product.title}`)
+                input(type="text" name="description" id="desription" placeholder="Description" value=`${product.description}`)
+                input(type="text" name="imageUrl" id="imageUrl" placeholder="Image Url" value=`${product.imageUrl}`)
+                input(type="number" name="price" id="price" placeholder="Price" value=`${product.price}`)
+                input(type="hidden" value=`${product.id}` name='productId')
+                button.btn(type="submit") Update product
+ else 
+    form.product-form(action=`/admin/add-product` method="POST")
+        div.form-control
+            label.title
+                input(type="text" name="title" id="title" placeholder="Title" )
+                input(type="text" name="description" id="desription" placeholder="Description" )
+                input(type="text" name="imageUrl" id="imageUrl" placeholder="Image Url" )
+                input(type="number" name="price" id="price" placeholder="Price" )
+                button.btn(type="submit") Add product

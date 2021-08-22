@@ -1,0 +1,8 @@
+extends layouts/main-layout.pug
+block content 
+    div.centered
+        h1.centered #{product.title}
+        img(src=`${product.imageUrl}`, alt=`${product.title}`)
+        h2 #{product.price}
+        p #{product.desription}
+        include includes/add-to-cart.pug

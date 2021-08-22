@@ -1,0 +1,33 @@
+extends layouts/main-layout.pug
+block styles 
+    link(rel="stylesheet", href="/css/main.css")
+block content 
+    if products.length > 0
+        div.cart-item.header-cart
+          div
+           p Name
+          div 
+          p Description
+          div 
+           p Price
+          div
+           p Quantity
+        div
+            each product in products
+                article.cart-item 
+                    div.cart__image
+                        img(src=`${product.productData.imageUrl}`, alt="A Book")
+                    div.card__header
+                        h1.product__title #{product.productData.title}
+                   
+                    div.card__content
+                    p.product__description #{product.productData.description}
+                        h2.product__price $#{product.productData.price}
+                        h2 #{product.qty}
+                        div.card__actions
+                        form(action='/delete-from-cart' method="POST")
+                            button.btn Delete from Cart
+                            input(type="hidden" name="productId" value=`${product.productData.id}`)
+        h2 Total price: #{cart.totalPrice} $
+    else
+        h1 No Products
