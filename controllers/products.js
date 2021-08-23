@@ -54,16 +54,18 @@ exports.createNewProduct = (req, res, next) => {
     req.body.imageUrl,
     req.body.price
   );
-  product.save();
-  res.redirect("/");
+  product.save().then(() => {
+ res.redirect("/");
+  }).catch(err => console.log(err));
+ 
 };
 
 exports.getAdminProducts = (req, res, next) => {
-  const products = Product.fetchAll((products) => {
+  Product.fetchAll().then(([rows,filedData]) => {
     res.render("admin-products", {
-      prods: products,
+      prods: rows,
       docTitle: "Admin Products",
       path: "admin/products",
     });
-  });
+  }).catch(error => console.log(error));
 };
